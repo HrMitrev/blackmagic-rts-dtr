@@ -1,4 +1,4 @@
-/*
+	/*
  * This file is part of the Black Magic Debug project.
  *
  * Copyright (C) 2011  Black Sphere Technologies Ltd.
@@ -97,6 +97,9 @@ extern bool debug_bmp;
 		gpio_set_mode(USBUSART_PORT, GPIO_MODE_OUTPUT_50_MHZ, GPIO_CNF_OUTPUT_ALTFN_PUSHPULL, USBUSART_TX_PIN); \
 		gpio_set_mode(USBUSART_PORT, GPIO_MODE_INPUT, GPIO_CNF_INPUT_PULL_UPDOWN, USBUSART_RX_PIN);             \
 		gpio_set(USBUSART_PORT, USBUSART_RX_PIN);                                                               \
+		gpio_set_mode(USBUSART_PORT, GPIO_MODE_OUTPUT_50_MHZ, \
+                	  GPIO_CNF_OUTPUT_OPENDRAIN, USBUSART_RTS_PIN | USBUSART_DTR_PIN); \
+		gpio_set(USBUSART_PORT, USBUSART_RTS_PIN | USBUSART_DTR_PIN); \
 	} while (0)
 
 #define USB_DRIVER st_usbfs_v1_usb_driver
@@ -135,6 +138,8 @@ extern bool debug_bmp;
 #define USBUSART_PORT          GPIOA
 #define USBUSART_TX_PIN        GPIO2
 #define USBUSART_RX_PIN        GPIO3
+#define USBUSART_RTS_PIN	GPIO4
+#define USBUSART_DTR_PIN	GPIO1
 #define USBUSART_DMA_TX_CHAN   DMA_CHANNEL7
 #define USBUSART_DMA_TX_IRQ    NVIC_DMA1_CHANNEL7_IRQ
 #define USBUSART_DMA_TX_ISR(x) dma1_channel7_isr(x)
