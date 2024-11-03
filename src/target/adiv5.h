@@ -233,6 +233,11 @@
 /* This one is not a quirk, but the field's a convinient place to store this */
 #define ADIV5_AP_ACCESS_BANKED (1U << 7U) /* Last AP access was done using the banked interface */
 
+/* This is the IDR value of the configuration access port in CC23XX*/
+#define ADIV5_TEXAS_CFG_AP_IDR (0x2e0001U)
+/* This is the IDR value of the security access port in CC23XX*/
+#define ADIV5_TEXAS_SEC_AP_IDR (0x2e0000U)
+
 /* JTAG DP discovery handler */
 void adiv5_jtag_dp_handler(uint8_t dev_index);
 

@@ -532,7 +532,9 @@ void adiv5_dp_init(adiv5_debug_port_s *const dp)
 		 * Due to the Tiva TM4C1294KCDT (among others) repeating the single AP ad-nauseum,
 		 * this check is needed so that we bail rather than repeating the same AP ~256 times.
 		 */
-		if (ap->dp->quirks & ADIV5_DP_QUIRK_DUPED_AP) {
+		if (ap->dp->quirks & ADIV5_DP_QUIRK_DUPED_AP ||
+			/* If we continue scanning for APs after the security AP, the TI CC23XX target freezes */
+			(dp->target_designer_code == JEP106_MANUFACTURER_TEXAS && (ap->idr == ADIV5_TEXAS_SEC_AP_IDR))) {
 			adiv5_ap_unref(ap);
 			adiv5_dp_unref(dp);
 			return;
